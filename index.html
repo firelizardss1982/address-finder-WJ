@@ -1,6 +1,62 @@
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="gOQEOOg" data-user="firelizardss" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/firelizardss/pen/gOQEOOg">
-  Address-Grid Locator</a> by Elijah (<a href="https://codepen.io/firelizardss">@firelizardss</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Address-Grid Locator</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.27/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.27/"></script>
+
+  <script>
+    require([
+      "esri/config",
+      "esri/WebMap",
+      "esri/views/MapView",
+      "esri/widgets/ScaleBar",
+      "esri/widgets/Legend",
+      "esri/widgets/Search"
+    ], function(esriConfig, WebMap, MapView, ScaleBar, Legend, Search) {
+
+      esriConfig.apiKey = "AAPK7719f6ec849a4e949e4dc410e1bc1389P6YaiJKYIFB8R9BmBQa41ezAkKiR61rcGWsu5lZO-xQ_kR3y28ayjVq9ZSyjd0Lp";
+
+      const webmap = new WebMap({
+        portalItem: {
+          id: "776b2d3994b04d5ab5928bc061beea58"
+        }
+      });
+
+      const view = new MapView({
+        container: "viewDiv",
+        map: webmap
+      });
+
+      const scalebar = new ScaleBar({
+        view: view
+      });
+
+      view.ui.add(scalebar, "bottom-left");
+
+      const legend = new Legend ({
+        view: view
+      });
+      view.ui.add(legend, "top-right");
+
+      const search = new Search({
+        view: view
+      });
+      
+      view.ui.add(search, "top-left");
+    });
+  </script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
